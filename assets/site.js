@@ -42,13 +42,29 @@
   var form = document.getElementById('quote-form');
   if (!form) return;
 
-  // Radio-flögur (stærð eignar, áhugi á mati)
+  // Radio-flögur (á hæð, lyfta, áhugi á mati)
   form.querySelectorAll('fieldset[data-group="radio"]').forEach(function (fs) {
     fs.addEventListener('change', function () {
       fs.querySelectorAll('label.chip').forEach(function (l) {
         l.setAttribute('data-active', l.querySelector('input').checked ? 'true' : 'false');
       });
       clearError(fs);
+      // Sýna/fela framhaldsspurningu (t.d. lyfta ef eignin er á hæð)
+      var targetId = fs.getAttribute('data-toggles');
+      if (targetId) {
+        var target = document.getElementById(targetId);
+        var picked = fs.querySelector('input:checked');
+        var show = !!picked && picked.value === fs.getAttribute('data-toggle-value');
+        target.hidden = !show;
+        target.querySelectorAll('input').forEach(function (inp) {
+          inp.disabled = !show;
+          if (!show) inp.checked = false;
+        });
+        if (!show) {
+          target.querySelectorAll('label.chip').forEach(function (l) { l.setAttribute('data-active', 'false'); });
+          clearError(target);
+        }
+      }
     });
   });
 
@@ -114,11 +130,12 @@
     form.querySelectorAll('input.field-input[data-required]').forEach(function (inp) {
       var label = inp.closest('label');
       var v = inp.value.trim();
-      var bad = !v || (inp.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) || (inp.type === 'tel' && v.replace(/\D/g, '').length < 7);
+      var bad = !v || (inp.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) || (inp.type === 'tel' && v.replace(/\D/g, '').length < 7) || (inp.hasAttribute('data-numeric') && !/^\d+([.,]\d+)?$/.test(v.replace(/\s|m²|m2|fm/gi, '')));
       if (bad) { showError(label, inp.getAttribute('data-required')); firstBad = firstBad || inp; }
       else clearError(label);
     });
     form.querySelectorAll('fieldset[data-required]').forEach(function (fs) {
+      if (fs.hidden) { clearError(fs); return; }
       if (!fs.querySelector('input:checked')) { showError(fs, fs.getAttribute('data-required')); firstBad = firstBad || fs.querySelector('input'); }
       else clearError(fs);
     });
