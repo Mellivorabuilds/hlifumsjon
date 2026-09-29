@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap">
-<link rel="stylesheet" href="/assets/styles.css">
+<link rel="stylesheet" href="/assets/styles.css?v=2">
 </head>
 <body>
 <div class="min-h-screen bg-background text-foreground">
@@ -186,13 +186,24 @@
       </div>
       <label class="block"><span class="field-label">Tölvupóstfang<span class="text-destructive"> *</span></span><input type="email" autocomplete="email" class="field-input" name="email" data-required="Vinsamlegast sláðu inn gilt netfang"><span class="field-error mt-1.5 block text-xs text-destructive" hidden></span></label>
 
-      <fieldset data-group="radio" data-required="Veldu stærð eignar">
-        <legend class="field-label">Stærð eignar <span class="text-destructive">*</span></legend>
-        <div class="grid grid-cols-2 gap-2 sm:grid-cols-4">
-          <label data-active="false" class="chip !rounded-lg !px-3 !py-3 !text-center"><input type="radio" class="sr-only" name="Stærð eignar" value="0–60 m²">0–60 m²</label>
-          <label data-active="false" class="chip !rounded-lg !px-3 !py-3 !text-center"><input type="radio" class="sr-only" name="Stærð eignar" value="61–120 m²">61–120 m²</label>
-          <label data-active="false" class="chip !rounded-lg !px-3 !py-3 !text-center"><input type="radio" class="sr-only" name="Stærð eignar" value="121–200 m²">121–200 m²</label>
-          <label data-active="false" class="chip !rounded-lg !px-3 !py-3 !text-center"><input type="radio" class="sr-only" name="Stærð eignar" value="Yfir 200 m²">Yfir 200 m²</label>
+      <label class="block"><span class="field-label">Heimilisfang eignar<span class="text-destructive"> *</span></span><input type="text" autocomplete="off" placeholder="Gata, húsnúmer og bær" class="field-input" name="Heimilisfang" data-required="Vinsamlegast sláðu inn heimilisfang"><span class="field-error mt-1.5 block text-xs text-destructive" hidden></span></label>
+
+      <label class="block"><span class="field-label">Stærð eignar (m²)<span class="text-destructive"> *</span></span><span class="relative block"><input type="text" inputmode="numeric" autocomplete="off" placeholder="t.d. 85" class="field-input field-input-unit" name="Stærð eignar (m²)" data-required="Vinsamlegast sláðu inn stærð eignar í fermetrum" data-numeric="true"><span class="field-unit" aria-hidden="true">m²</span></span><span class="field-error mt-1.5 block text-xs text-destructive" hidden></span></label>
+
+      <fieldset data-group="radio" data-required="Vinsamlegast veldu hvort eignin sé á hæð" data-toggles="lift-question" data-toggle-value="Já">
+        <legend class="field-label">Er húsnæðið á hæð? <span class="text-destructive">*</span></legend>
+        <div class="flex flex-wrap gap-2">
+          <label data-active="false" class="chip"><input type="radio" class="sr-only" name="Á hæð" value="Já">Já</label>
+          <label data-active="false" class="chip"><input type="radio" class="sr-only" name="Á hæð" value="Nei, á jarðhæð">Nei, á jarðhæð</label>
+        </div>
+        <span class="field-error mt-1.5 block text-xs text-destructive" hidden></span>
+      </fieldset>
+
+      <fieldset id="lift-question" data-group="radio" data-required="Vinsamlegast veldu hvort lyfta sé í húsinu" hidden>
+        <legend class="field-label">Er lyfta í húsinu? <span class="text-destructive">*</span></legend>
+        <div class="flex flex-wrap gap-2">
+          <label data-active="false" class="chip"><input type="radio" class="sr-only" name="Lyfta" value="Já" disabled>Já</label>
+          <label data-active="false" class="chip"><input type="radio" class="sr-only" name="Lyfta" value="Nei" disabled>Nei</label>
         </div>
         <span class="field-error mt-1.5 block text-xs text-destructive" hidden></span>
       </fieldset>
@@ -286,6 +297,6 @@
 </footer>
 
 </div>
-<script src="/assets/site.js" defer></script>
+<script src="/assets/site.js?v=2" defer></script>
 </body>
 </html>
