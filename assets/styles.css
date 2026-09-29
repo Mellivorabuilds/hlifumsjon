@@ -86,6 +86,8 @@
   .field-input::placeholder { color: color-mix(in oklab, var(--color-muted-foreground) 80%, transparent); }
   .field-input:focus { border-color: var(--color-ring); box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-ring) 18%, transparent); outline: none; }
   .field-input[aria-invalid="true"] { border-color: var(--color-destructive); }
+  .field-input-unit { padding-right: 3rem; }
+  .field-unit { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: var(--color-muted-foreground); font-size: 1rem; pointer-events: none; }
   .chip { border: 1px solid var(--color-border); background-color: var(--color-background); color: var(--color-muted-foreground); cursor: pointer; border-radius: 9999px; justify-content: center; align-items: center; padding: 0.625rem 1.125rem; font-size: 0.875rem; font-weight: 500; transition: border-color 0.15s, background-color 0.15s, color 0.15s; display: inline-flex; }
   .chip:hover { border-color: color-mix(in oklab, var(--color-foreground) 25%, var(--color-border)); color: var(--color-foreground); }
   .chip:has(input:focus-visible), .chip:focus-visible { outline: 2px solid var(--color-ring); outline-offset: 2px; }
